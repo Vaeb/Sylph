@@ -6,6 +6,8 @@
         },
         "completed-docs": false,
         "curly": false,
+        "cyclomatic-complexity": [true, 25],
+        "increment-decrement": false,
         "indent": [true, "spaces", 4],
         "member-ordering": {
             "options": {
