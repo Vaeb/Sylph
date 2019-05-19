@@ -35,7 +35,7 @@ export class EventHandler {
         }
     }
 
-    private parseCommand(content: string, contentLower: string) {
+    private parseCommand(content: string, contentLower: string): ICommandData | {} {
         const { prefix } = this.bot.config;
 
         let contentCmd;
