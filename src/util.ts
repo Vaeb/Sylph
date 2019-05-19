@@ -1,4 +1,4 @@
-import { Message, TextChannel } from 'discord.js';
+import { Guild, GuildMember, Message, TextChannel, User } from 'discord.js';
 import { format } from 'util';
 
 export const print = async (channel: TextChannel, ...args: any[]): Promise<void> => {
@@ -18,8 +18,25 @@ interface IPropInterface {
     generate(...args: string[]): any;
 }
 
-export const getValuesFromObj = (obj: any, props: string[] = [], newProps: IPropInterface[] = []) => {
-    const newObj: { [key: string]: any } = {};
+interface IObjValues {
+    [key: string]: any;
+}
+
+interface IMessageValues {
+    id: string;
+    guild: Guild;
+    channel: TextChannel;
+    member: GuildMember;
+    author: User;
+    content: string;
+    createdTimestamp: number;
+    contentLower: string;
+    speaker: GuildMember;
+    nowStamp: number;
+}
+
+export const getValuesFromObj = (obj: any, props: string[] = [], newProps: IPropInterface[] = []): IObjValues => {
+    const newObj: IObjValues = {};
 
     props.forEach((prop) => {
         newObj[prop] = obj[prop];
@@ -33,7 +50,7 @@ export const getValuesFromObj = (obj: any, props: string[] = [], newProps: IProp
     return newObj;
 };
 
-export const getMsgObjValues = (msgObj: Message) =>
+export const getMsgObjValues = (msgObj: Message): IMessageValues =>
     getValuesFromObj(
         msgObj,
         ['id', 'guild', 'channel', 'member', 'author', 'content', 'createdTimestamp'],
@@ -42,4 +59,4 @@ export const getMsgObjValues = (msgObj: Message) =>
             { newProp: 'speaker', fromProps: ['member'], generate: (member) => member },
             { newProp: 'nowStamp', fromProps: [], generate: () => +new Date() },
         ]
-    );
+    ) as IMessageValues;
