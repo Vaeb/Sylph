@@ -1,13 +1,11 @@
 // tslint:disable:no-require-imports
 // tslint:disable:no-var-requires
 
-import { format } from 'util';
-
 import { ICommand } from '../types';
 
 const util = require('../util');
 const { bot, Bot } = require('../bot');
-const { print: printOld } = util;
+const { print: printOld, format } = util;
 const client = bot.client;
 
 export const command: ICommand = {
