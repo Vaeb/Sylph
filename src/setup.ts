@@ -7,7 +7,7 @@ console.log = (...args: any[]) => {
     if (!args.length) return logCopy();
 
     const nowDate = new Date();
-    // nowDate.setHours(nowDate.getHours() + 1);
+    nowDate.setHours(nowDate.getHours() + 1);
 
     const [firstArg, ...otherArgs] = args; // Necessary because nodeFormat requires 1+ arguments and TS thinks ...args is 0+ arguments
 
