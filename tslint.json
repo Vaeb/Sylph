@@ -9,6 +9,8 @@
         "cyclomatic-complexity": [true, 25],
         "increment-decrement": false,
         "indent": [true, "spaces", 4],
+        "max-classes-per-file": false,
+        // "max-classes-per-file": { "options": 1 },
         "member-ordering": {
             "options": {
                 "order": "statics-first",
@@ -19,9 +21,11 @@
         "no-any": false,
         "no-console": false,
         "no-eval": false,
+        "no-import-side-effect": false,
         "no-magic-numbers": false,
         "no-non-null-assertion": false,
         "no-null-keyword": false,
+        "no-parameter-properties": false,
         "no-parameter-reassignment": false,
         "object-literal-sort-keys": false,
         "prefer-function-over-method": false,

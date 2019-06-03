@@ -1,3 +1,5 @@
+import './setup';
+// tslint:disable-next-line:ordered-imports
 import { bot } from './bot';
 import { EventHandler } from './handlers';
 

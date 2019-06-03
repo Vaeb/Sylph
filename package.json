@@ -11,6 +11,7 @@
   "author": "Vaeb",
   "license": "ISC",
   "devDependencies": {
+    "@types/dateformat": "^3.0.0",
     "@types/glob": "^7.1.1",
     "@types/node": "^12.0.2",
     "prettier": "^1.17.1",
@@ -24,6 +25,7 @@
   },
   "dependencies": {
     "bufferutil": "^4.0.1",
+    "dateformat": "^3.0.3",
     "discord.js": "^11.5.0",
     "glob": "^7.1.4"
   }

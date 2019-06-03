@@ -5,6 +5,21 @@ import { IAnyObject } from './types';
 
 export const charLimit = 1949;
 
+// type GetsIgnored = Date | boolean | string | any[] | null | undefined;
+// type Clonify<T> = { [key in keyof T]: (ICloneObjDepthGen<T[key]>) | string };
+
+// interface ICloneObjDepthGen<U> {
+//     <U extends GetsIgnored>: U;
+//     <T extends object>(obj: T, maxDepth?: number, nowDepth?: number): Clonify<T>;
+//     <T>(obj: T, maxDepth?: number, nowDepth?: number): T | string;
+// }
+
+// interface ICloneObjDepth {
+//     <T extends GetsIgnored>(obj: T, maxDepth?: number, nowDepth?: number): T;
+//     <T extends object>(obj: T, maxDepth?: number, nowDepth?: number): Clonify<T>;
+//     <T>(obj: T, maxDepth?: number, nowDepth?: number): T | string;
+// }
+
 interface ICloneObjDepth {
     (obj: Date, maxDepth?: number, nowDepth?: number): Date; // Date
     <T>(obj: T[], maxDepth?: number, nowDepth?: number): T[] | string; // Array
@@ -55,12 +70,22 @@ export const cloneObjDepth: ICloneObjDepth = (obj: any, maxDepth: number = 1, no
     return obj; // Buffer (Still Object)
 };
 
+// const testObj = cloneObjDepth({ thing1a: { thing2a: 234, thing2b: { thing3a: 345 } }, thing1b: 123 }, 2);
+// const thing1a = testObj.thing1a;
+// if (thing1a instanceof Object) {
+//     thing1a;
+//     const thing2a = thing1a.thing2a;
+//     const thing2b = thing1a.thing2b;
+//     const thing3a = thing2b.thing3a;
+//     const thing1b = testObj.thing1b;
+// }
+
 export const format = (...args: any[]): string => {
     if (args.length < 1) return '';
 
     const newArgs = args.map((arg) => cloneObjDepth(arg, 2));
 
-    const [firstArg, ...otherArgs] = newArgs; // Have to do this because nodeFormat needs 1+ arguments and TS thinks ...newArgs is 0+ arguments
+    const [firstArg, ...otherArgs] = newArgs; // Necessary because nodeFormat requires 1+ arguments and TS thinks ...newArgs is 0+ arguments
 
     return nodeFormat(firstArg, ...otherArgs);
 };
